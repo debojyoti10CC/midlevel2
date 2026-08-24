@@ -1,0 +1,6 @@
+{
+  "outputDirectory": "bboard-ui/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
