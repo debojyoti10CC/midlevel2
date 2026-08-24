@@ -14,6 +14,31 @@ Welcome to **Secret Notes**, a premium, production-grade, privacy-preserving pri
 
 ---
 
+## Proof of Work
+
+| | |
+| :--- | :--- |
+| **GitHub Repository** | [github.com/debojyoti10CC/midlevel2](https://github.com/debojyoti10CC/midlevel2) |
+| **Live Deployment** | [midlevel2-fp11.vercel.app](https://midlevel2-fp11.vercel.app/#/) (Vercel) |
+| **CI Status** | [![CI](https://github.com/debojyoti10CC/midlevel2/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/debojyoti10CC/midlevel2/actions/workflows/ci.yaml) — 6/6 contract tests passing on every push |
+| **Demo Video** | [Watch on YouTube](https://youtu.be/WwQ3Vfvapk4) — wallet connect + full circuit call walkthrough |
+| **Deployed Preprod Contract** | Tx hash `fc5c0bb9b553f90e7efe9415d63e2681d54bfc24bf98928eea08bda41c34120a`, block #2,248,414, status **Success** — [verify on 1AM Explorer](https://explorer.1am.xyz/tx/fc5c0bb9b553f90e7efe9415d63e2681d54bfc24bf98928eea08bda41c34120a?network=preprod) |
+
+### Test Output
+
+![Contract test suite: 6 passed](docs/screenshots/contract-tests-passing.jpg)
+
+### Application Screenshots
+
+| | |
+| :--- | :--- |
+| ![Home screen](docs/screenshots/home-page.jpg) | ![App features](docs/screenshots/home-features.jpg) |
+| ![About page](docs/screenshots/about-privacy-model.jpg) | ![Deploy console](docs/screenshots/deploy-console.jpg) |
+
+![Dashboard gated state](docs/screenshots/dashboard-gated.jpg)
+
+---
+
 ## 1. System Architecture
 
 The Secret Notes DApp splits operations between **local client-side execution** (private state, proving) and **on-chain consensus verification** (public ledger state).
@@ -275,35 +300,12 @@ To check transaction confirmation statuses or view block operations, use the Mid
 
 ---
 
-## 13. Screenshots & Demo Video
-
-### Application Screenshots
-
-**Home Screen** — hero, wallet connect card, and network-mismatch handling:
-![Home screen](docs/screenshots/home-page.jpg)
-
-**App Features** section on the home page:
-![App features](docs/screenshots/home-features.jpg)
-
-**About / Privacy Model** page — the on-chain ZK principles explained in-app:
-![About page](docs/screenshots/about-privacy-model.jpg)
-
-**Contract Deployment Console**:
-![Deploy console](docs/screenshots/deploy-console.jpg)
-
-**Dashboard** — gated behind wallet connection:
-![Dashboard gated state](docs/screenshots/dashboard-gated.jpg)
-
-### Project Demo Video
-
-* **Video Walkthrough**: [Watch on YouTube](https://youtu.be/WwQ3Vfvapk4) — wallet connect and a full circuit call walkthrough on the live deployment.
-
----
-
-## 14. Deployed Preprod Contract
+## 13. Deployed Preprod Contract (Full Details)
 
 * **Network**: Midnight Preprod
 * **Contract Transaction Hash**: `fc5c0bb9b553f90e7efe9415d63e2681d54bfc24bf98928eea08bda41c34120a`
 * **Block**: #2,248,414
 * **Status**: Success (deployment fee: 1 speck)
 * **Verify on-chain**: [View on 1AM Explorer](https://explorer.1am.xyz/tx/fc5c0bb9b553f90e7efe9415d63e2681d54bfc24bf98928eea08bda41c34120a?network=preprod)
+
+See the **Proof of Work** section at the top of this README for the demo video and application screenshots.
