@@ -27,22 +27,22 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onEdit, onDelete }) =>
         transition: 'transform 0.3s ease, border-color 0.3s ease',
         '&:hover': {
           transform: 'translateY(-2px)',
-          borderColor: 'rgba(99, 102, 241, 0.3)',
-          boxShadow: '0 8px 24px rgba(99, 102, 241, 0.08)',
+          borderColor: 'rgba(244, 63, 94, 0.3)',
+          boxShadow: '0 8px 24px rgba(244, 63, 94, 0.08)',
         },
       }}
     >
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <LockIcon sx={{ color: '#06b6d4', fontSize: '18px' }} />
+          <LockIcon sx={{ color: '#14b8a6', fontSize: '18px' }} />
           <Typography variant="h6" sx={{ fontWeight: 'bold', wordBreak: 'break-word' }}>
             {note.title}
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: 0.5 }}>
           <Tooltip title="Edit Note (will prove update circuit)">
-            <IconButton size="small" onClick={() => onEdit(note)} sx={{ color: '#818cf8', '&:hover': { background: 'rgba(129, 140, 248, 0.1)' } }}>
+            <IconButton size="small" onClick={() => onEdit(note)} sx={{ color: '#fb7185', '&:hover': { background: 'rgba(129, 140, 248, 0.1)' } }}>
               <EditIcon fontSize="small" />
             </IconButton>
           </Tooltip>
@@ -62,7 +62,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onEdit, onDelete }) =>
       {/* Privacy Metadata (Commitment & Salt) */}
       <Box sx={{ pt: 2, borderTop: '1px solid rgba(255, 255, 255, 0.05)', display: 'flex', flexDirection: 'column', gap: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <CodeIcon sx={{ color: '#a855f7', fontSize: '14px' }} />
+          <CodeIcon sx={{ color: '#f59e0b', fontSize: '14px' }} />
           <Typography variant="caption" sx={{ fontWeight: 'bold' }}>
             ZK Commitment (stored on-chain):
           </Typography>
@@ -72,7 +72,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onEdit, onDelete }) =>
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <KeyIcon sx={{ color: '#06b6d4', fontSize: '14px' }} />
+          <KeyIcon sx={{ color: '#14b8a6', fontSize: '14px' }} />
           <Typography variant="caption" sx={{ fontWeight: 'bold' }}>
             Random Salt (stored locally):
           </Typography>

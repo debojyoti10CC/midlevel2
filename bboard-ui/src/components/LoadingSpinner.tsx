@@ -20,7 +20,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ open, message = 
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, p: 4, textAlign: 'center' }}>
         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-          <CircularProgress size={80} thickness={3} sx={{ color: '#6366f1' }} />
+          <CircularProgress size={80} thickness={3} sx={{ color: '#f43f5e' }} />
           <Box
             sx={{
               top: 0,
@@ -33,7 +33,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ open, message = 
               justifyContent: 'center',
             }}
           >
-            <ShieldOutlinedIcon sx={{ color: '#a855f7', fontSize: '36px', animation: 'pulse 1.5s infinite ease-in-out' }} />
+            <ShieldOutlinedIcon sx={{ color: '#f59e0b', fontSize: '36px', animation: 'pulse 1.5s infinite ease-in-out' }} />
           </Box>
         </Box>
         <Box>

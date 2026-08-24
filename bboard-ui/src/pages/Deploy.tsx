@@ -9,7 +9,7 @@ export const Deploy: React.FC = () => {
     <Box sx={{ py: 6, display: 'flex', flexDirection: 'column', gap: 5 }}>
       {/* Title */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <CloudUploadIcon sx={{ color: '#6366f1', fontSize: '32px' }} />
+        <CloudUploadIcon sx={{ color: '#f43f5e', fontSize: '32px' }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
           Contract Deployment Console
         </Typography>
@@ -21,7 +21,7 @@ export const Deploy: React.FC = () => {
 
         <Paper sx={{ p: 4, display: 'flex', flexDirection: 'column', gap: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-            <ShieldIcon sx={{ color: '#06b6d4', fontSize: '24px' }} />
+            <ShieldIcon sx={{ color: '#14b8a6', fontSize: '24px' }} />
             <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
               Why deploy a contract?
             </Typography>

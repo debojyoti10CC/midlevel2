@@ -140,7 +140,7 @@ export const MyNotes: React.FC = () => {
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 2 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <DescriptionIcon sx={{ color: '#6366f1', fontSize: '32px' }} />
+          <DescriptionIcon sx={{ color: '#f43f5e', fontSize: '32px' }} />
           <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
             My Private Notes
           </Typography>
@@ -152,7 +152,7 @@ export const MyNotes: React.FC = () => {
 
       {/* Transaction alerts */}
       {txHash && (
-        <Alert severity="info" sx={{ borderRadius: '12px', background: 'rgba(6, 182, 212, 0.05)', border: '1px solid rgba(6,182,212,0.2)' }}>
+        <Alert severity="info" sx={{ borderRadius: '12px', background: 'rgba(20, 184, 166, 0.05)', border: '1px solid rgba(6,182,212,0.2)' }}>
           Last Transaction Hash: <span style={{ fontFamily: 'monospace' }}>{txHash}</span>
         </Alert>
       )}

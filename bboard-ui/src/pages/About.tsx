@@ -11,7 +11,7 @@ export const About: React.FC = () => {
     <Box sx={{ py: 6, display: 'flex', flexDirection: 'column', gap: 6 }}>
       {/* Title */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <InfoIcon sx={{ color: '#6366f1', fontSize: '32px' }} />
+        <InfoIcon sx={{ color: '#f43f5e', fontSize: '32px' }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
           About Secret Notes ZK Model
         </Typography>
@@ -41,7 +41,7 @@ export const About: React.FC = () => {
         <Box>
           <Card sx={{ height: '100%' }}>
             <CardContent sx={{ p: 4, display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <VpnKeyIcon sx={{ color: '#6366f1', fontSize: '32px' }} />
+              <VpnKeyIcon sx={{ color: '#f43f5e', fontSize: '32px' }} />
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Note Commitments
               </Typography>
@@ -59,7 +59,7 @@ export const About: React.FC = () => {
         <Box>
           <Card sx={{ height: '100%' }}>
             <CardContent sx={{ p: 4, display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <VisibilityOffIcon sx={{ color: '#a855f7', fontSize: '32px' }} />
+              <VisibilityOffIcon sx={{ color: '#f59e0b', fontSize: '32px' }} />
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Nullifiers
               </Typography>
@@ -77,7 +77,7 @@ export const About: React.FC = () => {
         <Box>
           <Card sx={{ height: '100%' }}>
             <CardContent sx={{ p: 4, display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <SecurityIcon sx={{ color: '#06b6d4', fontSize: '32px' }} />
+              <SecurityIcon sx={{ color: '#14b8a6', fontSize: '32px' }} />
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Local ZK Proofs
               </Typography>

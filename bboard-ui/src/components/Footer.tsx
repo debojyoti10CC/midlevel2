@@ -17,23 +17,23 @@ export const Footer: React.FC = () => {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
+            flexDirection: { xs: 'column', md: 'row-reverse' },
             justifyContent: 'space-between',
             alignItems: 'center',
             gap: 2,
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <ShieldIcon sx={{ color: '#a855f7', fontSize: '18px' }} />
+            <ShieldIcon sx={{ color: '#f59e0b', fontSize: '18px' }} />
             <Typography variant="body2" color="rgba(255, 255, 255, 0.5)">
               © {new Date().getFullYear()} Secret Notes &middot; Powered by Midnight Network ZK privacy
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', gap: 3 }}>
-            <Link href="https://midnight.network" target="_blank" rel="noopener" color="rgba(255, 255, 255, 0.5)" sx={{ textDecoration: 'none', '&:hover': { color: '#6366f1' } }}>
+            <Link href="https://midnight.network" target="_blank" rel="noopener" color="rgba(255, 255, 255, 0.5)" sx={{ textDecoration: 'none', '&:hover': { color: '#f43f5e' } }}>
               Official Website
             </Link>
-            <Link href="https://docs.midnight.network" target="_blank" rel="noopener" color="rgba(255, 255, 255, 0.5)" sx={{ textDecoration: 'none', '&:hover': { color: '#6366f1' } }}>
+            <Link href="https://docs.midnight.network" target="_blank" rel="noopener" color="rgba(255, 255, 255, 0.5)" sx={{ textDecoration: 'none', '&:hover': { color: '#f43f5e' } }}>
               Developer Docs
             </Link>
           </Box>

@@ -29,13 +29,13 @@ export const WalletCard: React.FC = () => {
     <Paper sx={{ p: 4, height: '100%', display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <WalletIcon sx={{ color: '#6366f1', fontSize: '28px' }} />
+          <WalletIcon sx={{ color: '#f43f5e', fontSize: '28px' }} />
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Midnight Wallet
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255,255,255,0.06)', px: 1.5, py: 0.5, borderRadius: '20px' }}>
-          <Box sx={{ width: '8px', height: '8px', borderRadius: '50%', background: getStatusColor(), boxShadow: `0 0 8px ${getStatusColor()}` }} />
+          <Box sx={{ width: '9px', height: '9px', borderRadius: '3px', background: getStatusColor(), boxShadow: `0 0 8px ${getStatusColor()}` }} />
           <Typography variant="caption" sx={{ fontWeight: 'bold', color: getStatusColor() }}>
             {getStatusText()}
           </Typography>
@@ -55,9 +55,9 @@ export const WalletCard: React.FC = () => {
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <WifiTetheringIcon sx={{ color: '#a855f7', fontSize: '18px' }} />
+            <WifiTetheringIcon sx={{ color: '#f59e0b', fontSize: '18px' }} />
             <Typography variant="body2">
-              Network: <span style={{ fontWeight: 'bold', color: '#a855f7' }}>{network}</span>
+              Network: <span style={{ fontWeight: 'bold', color: '#f59e0b' }}>{network}</span>
             </Typography>
           </Box>
 

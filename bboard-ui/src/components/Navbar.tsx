@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
   };
 
   const navLinkStyle = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? '#6366f1' : '#ffffff',
+    color: isActive ? '#f43f5e' : '#ffffff',
     textDecoration: 'none',
     fontWeight: isActive ? 700 : 500,
     fontSize: '0.95rem',
@@ -36,18 +36,18 @@ export const Navbar: React.FC = () => {
   return (
     <AppBar position="sticky" sx={{ background: 'rgba(3, 3, 8, 0.7)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', boxShadow: 'none' }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ justifyContent: 'space-between', height: '70px' }}>
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between', height: '76px', flexDirection: 'row-reverse' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none', color: 'inherit' }} component={NavLink} to="/">
             <Box
               sx={{
-                width: '38px',
-                height: '38px',
-                borderRadius: '10px',
-                background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 0 15px rgba(99, 102, 241, 0.4)',
+                boxShadow: '0 0 15px rgba(244, 63, 94, 0.4)',
               }}
             >
               <ShieldIcon sx={{ color: '#fff', fontSize: '20px' }} />
@@ -73,16 +73,16 @@ export const Navbar: React.FC = () => {
             {isConnected && !isMobile && (
               <Box
                 sx={{
-                  background: 'rgba(99, 102, 241, 0.1)',
-                  border: '1px solid rgba(99, 102, 241, 0.3)',
-                  borderRadius: '12px',
+                  background: 'rgba(244, 63, 94, 0.1)',
+                  border: '1px solid rgba(244, 63, 94, 0.3)',
+                  borderRadius: '999px',
                   padding: '6px 14px',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 1,
                 }}
               >
-                <Box sx={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 8px #10b981' }} />
+                <Box sx={{ width: '9px', height: '9px', borderRadius: '3px', background: '#10b981', boxShadow: '0 0 8px #10b981' }} />
                 <Typography variant="caption" sx={{ fontFamily: 'monospace', fontWeight: 'bold' }}>
                   {walletAddress ? `${walletAddress.substring(0, 8)}...${walletAddress.substring(walletAddress.length - 8)}` : 'Connected'}
                 </Typography>

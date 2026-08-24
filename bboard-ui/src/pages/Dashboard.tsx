@@ -20,7 +20,7 @@ export const Dashboard: React.FC = () => {
     <Box sx={{ py: 6, display: 'flex', flexDirection: 'column', gap: 5 }}>
       {/* Title */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <DashboardIcon sx={{ color: '#6366f1', fontSize: '32px' }} />
+        <DashboardIcon sx={{ color: '#f43f5e', fontSize: '32px' }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
           Application Dashboard
         </Typography>
@@ -87,7 +87,7 @@ export const Dashboard: React.FC = () => {
                   <Typography variant="body2" color="text.secondary">
                     Private Notes Decrypted
                   </Typography>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 'bold', color: '#06b6d4' }}>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 'bold', color: '#14b8a6' }}>
                     {notes.length} Notes
                   </Typography>
                 </Box>
@@ -108,9 +108,9 @@ export const Dashboard: React.FC = () => {
             </Paper>
 
             {/* Privacy note explanation card */}
-            <Paper sx={{ p: 4, background: 'rgba(6, 182, 212, 0.02)', borderColor: 'rgba(6, 182, 212, 0.15)' }}>
+            <Paper sx={{ p: 4, background: 'rgba(20, 184, 166, 0.02)', borderColor: 'rgba(20, 184, 166, 0.15)' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-                <ShieldIcon sx={{ color: '#06b6d4' }} />
+                <ShieldIcon sx={{ color: '#14b8a6' }} />
                 <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                   Observable Privacy Check
                 </Typography>

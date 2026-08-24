@@ -27,7 +27,7 @@ export const DeploymentCard: React.FC = () => {
   return (
     <Paper sx={{ p: 4, height: '100%', display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <CloudUploadIcon sx={{ color: '#a855f7', fontSize: '28px' }} />
+        <CloudUploadIcon sx={{ color: '#f59e0b', fontSize: '28px' }} />
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
           Smart Contract Deployment
         </Typography>
