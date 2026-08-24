@@ -9,6 +9,8 @@
 
 Welcome to **Secret Notes**, a premium, production-grade, privacy-preserving private notes application built on the **Midnight Network** utilizing zero-knowledge (ZK) proofs. Secret Notes allows users to perform full CRUD operations (Create, Read, Update, Delete) on private notes. Note plaintexts, titles, and secret keys never leave the user's browser, while the blockchain secures cryptographic commitments to verify state transitions.
 
+**Live Demo**: [https://midlevel2-fp11.vercel.app/#/](https://midlevel2-fp11.vercel.app/#/)
+
 ---
 
 ## 1. System Architecture
