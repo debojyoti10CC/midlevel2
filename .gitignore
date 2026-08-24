@@ -59,6 +59,7 @@ jspm_packages/
 
 # Compact
 managed/
+!contract/src/managed/notes/
 
 .claude
 .midnight-expert
