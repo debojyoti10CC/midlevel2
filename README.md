@@ -275,17 +275,28 @@ To check transaction confirmation statuses or view block operations, use the Mid
 
 ---
 
-## 13. Screenshots & Demo Placeholders
+## 13. Screenshots & Demo Video
 
 ### Application Screenshots
 
-* **Home Screen**: *[Placeholder: screenshots/home.png]*
-* **Dashboard Overview**: *[Placeholder: screenshots/dashboard.png]*
-* **Notes Workspace**: *[Placeholder: screenshots/notes.png]*
+**Home Screen** — hero, wallet connect card, and network-mismatch handling:
+![Home screen](docs/screenshots/home-page.jpg)
+
+**App Features** section on the home page:
+![App features](docs/screenshots/home-features.jpg)
+
+**About / Privacy Model** page — the on-chain ZK principles explained in-app:
+![About page](docs/screenshots/about-privacy-model.jpg)
+
+**Contract Deployment Console**:
+![Deploy console](docs/screenshots/deploy-console.jpg)
+
+**Dashboard** — gated behind wallet connection:
+![Dashboard gated state](docs/screenshots/dashboard-gated.jpg)
 
 ### Project Demo Video
 
-* **Video Walkthrough**: *[Placeholder: media/demo_walkthrough.mp4]*
+* **Video Walkthrough**: *[Placeholder — link to be added: a ~1 minute recording of wallet connect + a successful circuit call]*
 
 ---
 
