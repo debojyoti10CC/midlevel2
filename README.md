@@ -300,7 +300,10 @@ To check transaction confirmation statuses or view block operations, use the Mid
 
 ---
 
-## 14. Contract Address Placeholder
+## 14. Deployed Preprod Contract
 
-* **Deployed Contract Address**: `[Placeholder: Your Deployed Preprod Contract Address]`
-* **Contract Transaction Hash**: `[Placeholder: Deployment Transaction Hash]`
+* **Network**: Midnight Preprod
+* **Contract Transaction Hash**: `fc5c0bb9b553f90e7efe9415d63e2681d54bfc24bf98928eea08bda41c34120a`
+* **Block**: #2,248,414
+* **Status**: Success (deployment fee: 1 speck)
+* **Verify on-chain**: [View on 1AM Explorer](https://explorer.1am.xyz/tx/fc5c0bb9b553f90e7efe9415d63e2681d54bfc24bf98928eea08bda41c34120a?network=preprod)
