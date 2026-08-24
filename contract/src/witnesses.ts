@@ -3,7 +3,7 @@ import { WitnessContext } from "@midnight-ntwrk/midnight-js-protocol/compact-run
 
 export type NotesPrivateState = {
   readonly secretKey: Uint8Array;
-  readonly notes?: Record<string, any>;
+  readonly notes?: Record<string, unknown>;
 };
 
 export const createNotesPrivateState = (secretKey: Uint8Array) => ({

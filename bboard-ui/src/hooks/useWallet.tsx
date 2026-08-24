@@ -1,14 +1,7 @@
 import { useMidnight } from './useMidnight';
 
 export const useWallet = () => {
-  const {
-    walletAddress,
-    network,
-    connectionStatus,
-    walletError,
-    connectWallet,
-    disconnectWallet,
-  } = useMidnight();
+  const { walletAddress, network, connectionStatus, walletError, connectWallet, disconnectWallet } = useMidnight();
 
   return {
     walletAddress,

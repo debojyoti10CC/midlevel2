@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, Paper, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Alert } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Alert,
+} from '@mui/material';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -17,7 +28,8 @@ import { Note } from '../../../api/src/index';
 export const MyNotes: React.FC = () => {
   const { isConnected } = useWallet();
   const { contractAddress } = useContract();
-  const { notes, createNote, updateNote, deleteNote, isWorking, isGeneratingProof, txHash, txSuccess, error } = useNotes();
+  const { notes, createNote, updateNote, deleteNote, isWorking, isGeneratingProof, txHash, txSuccess, error } =
+    useNotes();
 
   // Modal / Dialog States
   const [createOpen, setCreateOpen] = useState(false);
@@ -53,8 +65,8 @@ export const MyNotes: React.FC = () => {
     try {
       await createNote(title.trim(), content.trim());
       handleShowToast('Private Note created successfully! Commitment stored on-chain.', 'success');
-    } catch (err: any) {
-      handleShowToast(err.message || 'Failed to create note.', 'error');
+    } catch (err) {
+      handleShowToast((err instanceof Error ? err.message : undefined) || 'Failed to create note.', 'error');
     }
   };
 
@@ -72,8 +84,8 @@ export const MyNotes: React.FC = () => {
     try {
       await updateNote(activeNote.id, title.trim(), content.trim());
       handleShowToast('Private Note updated! New commitment stored, old commitment nullified.', 'success');
-    } catch (err: any) {
-      handleShowToast(err.message || 'Failed to update note.', 'error');
+    } catch (err) {
+      handleShowToast((err instanceof Error ? err.message : undefined) || 'Failed to update note.', 'error');
     }
   };
 
@@ -88,8 +100,8 @@ export const MyNotes: React.FC = () => {
     try {
       await deleteNote(activeNote.id);
       handleShowToast('Private Note deleted! On-chain commitment nullified.', 'success');
-    } catch (err: any) {
-      handleShowToast(err.message || 'Failed to delete note.', 'error');
+    } catch (err) {
+      handleShowToast((err instanceof Error ? err.message : undefined) || 'Failed to delete note.', 'error');
     }
   };
 
@@ -135,7 +147,10 @@ export const MyNotes: React.FC = () => {
     <Box sx={{ py: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>
       {/* Loading Spinners */}
       <LoadingSpinner open={isGeneratingProof} message="Generating local ZK proof..." />
-      <LoadingSpinner open={isWorking && !isGeneratingProof} message="Broadcasting transaction to Midnight network..." />
+      <LoadingSpinner
+        open={isWorking && !isGeneratingProof}
+        message="Broadcasting transaction to Midnight network..."
+      />
 
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 2 }}>
@@ -152,7 +167,10 @@ export const MyNotes: React.FC = () => {
 
       {/* Transaction alerts */}
       {txHash && (
-        <Alert severity="info" sx={{ borderRadius: '12px', background: 'rgba(20, 184, 166, 0.05)', border: '1px solid rgba(6,182,212,0.2)' }}>
+        <Alert
+          severity="info"
+          sx={{ borderRadius: '12px', background: 'rgba(20, 184, 166, 0.05)', border: '1px solid rgba(6,182,212,0.2)' }}
+        >
           Last Transaction Hash: <span style={{ fontFamily: 'monospace' }}>{txHash}</span>
         </Alert>
       )}
@@ -171,7 +189,7 @@ export const MyNotes: React.FC = () => {
             No Shielded Notes
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-            You haven't created any private notes yet. Tap the button above to construct your first note!
+            You haven&apos;t created any private notes yet. Tap the button above to construct your first note!
           </Typography>
         </Paper>
       ) : (
@@ -191,31 +209,93 @@ export const MyNotes: React.FC = () => {
       )}
 
       {/* CREATE DIALOG */}
-      <Dialog open={createOpen} onClose={() => setCreateOpen(false)} fullWidth maxWidth="sm" slotProps={{ paper: { sx: { background: 'rgba(3, 3, 8, 0.95)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', backdropFilter: 'blur(20px)' } } }}>
+      <Dialog
+        open={createOpen}
+        onClose={() => setCreateOpen(false)}
+        fullWidth
+        maxWidth="sm"
+        slotProps={{
+          paper: {
+            sx: {
+              background: 'rgba(3, 3, 8, 0.95)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '16px',
+              backdropFilter: 'blur(20px)',
+            },
+          },
+        }}
+      >
         <Box component="form" onSubmit={handleCreateSubmit}>
           <DialogTitle sx={{ fontWeight: 'bold' }}>Create Private Note</DialogTitle>
           <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 1 }}>
-            <TextField label="Title" placeholder="e.g. My Private Password" value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
-            <TextField label="Content" placeholder="Enter secure content..." value={content} onChange={(e) => setContent(e.target.value)} multiline rows={5} required fullWidth />
+            <TextField
+              label="Title"
+              placeholder="e.g. My Private Password"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              fullWidth
+            />
+            <TextField
+              label="Content"
+              placeholder="Enter secure content..."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              multiline
+              rows={5}
+              required
+              fullWidth
+            />
           </DialogContent>
           <DialogActions sx={{ p: 3 }}>
-            <Button onClick={() => setCreateOpen(false)} variant="outlined" color="inherit">Cancel</Button>
-            <Button type="submit" variant="contained" color="primary">Generate ZK Proof & Create</Button>
+            <Button onClick={() => setCreateOpen(false)} variant="outlined" color="inherit">
+              Cancel
+            </Button>
+            <Button type="submit" variant="contained" color="primary">
+              Generate ZK Proof & Create
+            </Button>
           </DialogActions>
         </Box>
       </Dialog>
 
       {/* EDIT DIALOG */}
-      <Dialog open={editOpen} onClose={() => setEditOpen(false)} fullWidth maxWidth="sm" slotProps={{ paper: { sx: { background: 'rgba(3, 3, 8, 0.95)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', backdropFilter: 'blur(20px)' } } }}>
+      <Dialog
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+        fullWidth
+        maxWidth="sm"
+        slotProps={{
+          paper: {
+            sx: {
+              background: 'rgba(3, 3, 8, 0.95)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '16px',
+              backdropFilter: 'blur(20px)',
+            },
+          },
+        }}
+      >
         <Box component="form" onSubmit={handleEditSubmit}>
           <DialogTitle sx={{ fontWeight: 'bold' }}>Edit Private Note</DialogTitle>
           <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 1 }}>
             <TextField label="Title" value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
-            <TextField label="Content" value={content} onChange={(e) => setContent(e.target.value)} multiline rows={5} required fullWidth />
+            <TextField
+              label="Content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              multiline
+              rows={5}
+              required
+              fullWidth
+            />
           </DialogContent>
           <DialogActions sx={{ p: 3 }}>
-            <Button onClick={() => setEditOpen(false)} variant="outlined" color="inherit">Cancel</Button>
-            <Button type="submit" variant="contained" color="primary">Prove & Update</Button>
+            <Button onClick={() => setEditOpen(false)} variant="outlined" color="inherit">
+              Cancel
+            </Button>
+            <Button type="submit" variant="contained" color="primary">
+              Prove & Update
+            </Button>
           </DialogActions>
         </Box>
       </Dialog>

@@ -34,8 +34,27 @@ export const WalletCard: React.FC = () => {
             Midnight Wallet
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255,255,255,0.06)', px: 1.5, py: 0.5, borderRadius: '20px' }}>
-          <Box sx={{ width: '9px', height: '9px', borderRadius: '3px', background: getStatusColor(), boxShadow: `0 0 8px ${getStatusColor()}` }} />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            background: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid rgba(255,255,255,0.06)',
+            px: 1.5,
+            py: 0.5,
+            borderRadius: '20px',
+          }}
+        >
+          <Box
+            sx={{
+              width: '9px',
+              height: '9px',
+              borderRadius: '3px',
+              background: getStatusColor(),
+              boxShadow: `0 0 8px ${getStatusColor()}`,
+            }}
+          />
           <Typography variant="caption" sx={{ fontWeight: 'bold', color: getStatusColor() }}>
             {getStatusText()}
           </Typography>
@@ -49,7 +68,17 @@ export const WalletCard: React.FC = () => {
             <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 0.5 }}>
               Shielded Coin Public Key (Address)
             </Typography>
-            <Typography variant="body2" sx={{ fontFamily: 'monospace', wordBreak: 'break-all', background: 'rgba(0,0,0,0.2)', p: 1.5, borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <Typography
+              variant="body2"
+              sx={{
+                fontFamily: 'monospace',
+                wordBreak: 'break-all',
+                background: 'rgba(0,0,0,0.2)',
+                p: 1.5,
+                borderRadius: '8px',
+                border: '1px solid rgba(255,255,255,0.05)',
+              }}
+            >
               {walletAddress}
             </Typography>
           </Box>
@@ -62,14 +91,24 @@ export const WalletCard: React.FC = () => {
           </Box>
 
           {isWrongNetwork && (
-            <Paper sx={{ p: 2, background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: '12px', display: 'flex', gap: 1.5 }}>
+            <Paper
+              sx={{
+                p: 2,
+                background: 'rgba(239, 68, 68, 0.08)',
+                border: '1px solid rgba(239, 68, 68, 0.25)',
+                borderRadius: '12px',
+                display: 'flex',
+                gap: 1.5,
+              }}
+            >
               <ErrorIcon sx={{ color: '#ef4444' }} />
               <Box>
                 <Typography variant="subtitle2" sx={{ color: '#ef4444', fontWeight: 'bold' }}>
                   Network Mismatch Detected
                 </Typography>
-                 <Typography variant="caption" color="text.secondary">
-                  Your wallet is connected to {network}, but this app requires <span style={{ fontWeight: 'bold' }}>{requiredNetwork}</span>. Please switch in your 1AM wallet.
+                <Typography variant="caption" color="text.secondary">
+                  Your wallet is connected to {network}, but this app requires{' '}
+                  <span style={{ fontWeight: 'bold' }}>{requiredNetwork}</span>. Please switch in your 1AM wallet.
                 </Typography>
                 <Button size="small" variant="outlined" color="error" onClick={() => reconnect()} sx={{ mt: 1 }}>
                   Reconnect Wallet
@@ -81,7 +120,16 @@ export const WalletCard: React.FC = () => {
       )}
 
       {walletError && (
-        <Typography variant="body2" color="error" sx={{ background: 'rgba(239, 68, 68, 0.05)', p: 1.5, borderRadius: '8px', border: '1px solid rgba(239,68,68,0.2)' }}>
+        <Typography
+          variant="body2"
+          color="error"
+          sx={{
+            background: 'rgba(239, 68, 68, 0.05)',
+            p: 1.5,
+            borderRadius: '8px',
+            border: '1px solid rgba(239,68,68,0.2)',
+          }}
+        >
           {walletError}
         </Typography>
       )}
@@ -93,7 +141,13 @@ export const WalletCard: React.FC = () => {
             Disconnect Wallet
           </Button>
         ) : (
-          <Button variant="contained" color="primary" fullWidth onClick={connectWallet} disabled={connectionStatus === 'connecting'}>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={connectWallet}
+            disabled={connectionStatus === 'connecting'}
+          >
             {connectionStatus === 'connecting' ? (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <CircularProgress size={18} color="inherit" />

@@ -7,7 +7,10 @@ interface LoadingSpinnerProps {
   message?: string;
 }
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ open, message = 'Generating local zero-knowledge proof...' }) => {
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+  open,
+  message = 'Generating local zero-knowledge proof...',
+}) => {
   return (
     <Backdrop
       sx={{
@@ -33,15 +36,27 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ open, message = 
               justifyContent: 'center',
             }}
           >
-            <ShieldOutlinedIcon sx={{ color: '#f59e0b', fontSize: '36px', animation: 'pulse 1.5s infinite ease-in-out' }} />
+            <ShieldOutlinedIcon
+              sx={{ color: '#f59e0b', fontSize: '36px', animation: 'pulse 1.5s infinite ease-in-out' }}
+            />
           </Box>
         </Box>
         <Box>
-          <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, background: 'linear-gradient(90deg, #fff, #cbd5e1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 'bold',
+              mb: 1,
+              background: 'linear-gradient(90deg, #fff, #cbd5e1)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
             {message}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ maxWidth: '350px' }}>
-            Midnight compiles and executes ZK circuits locally inside your browser to verify your keys and protect your notes. Please do not close this window.
+            Midnight compiles and executes ZK circuits locally inside your browser to verify your keys and protect your
+            notes. Please do not close this window.
           </Typography>
         </Box>
       </Box>

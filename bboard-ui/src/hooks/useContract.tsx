@@ -1,12 +1,7 @@
 import { useMidnight } from './useMidnight';
 
 export const useContract = () => {
-  const {
-    contractAddress,
-    isWorking,
-    resolveContract,
-    txError,
-  } = useMidnight();
+  const { contractAddress, isWorking, resolveContract, txError } = useMidnight();
 
   return {
     contractAddress,

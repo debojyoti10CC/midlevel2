@@ -59,7 +59,11 @@ export const Home: React.FC = () => {
             }}
           >
             <VerifiedUserIcon sx={{ color: '#fda4af', fontSize: '16px' }} />
-            <Typography variant="caption" color="#fda4af" sx={{ fontWeight: 'bold', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+            <Typography
+              variant="caption"
+              color="#fda4af"
+              sx={{ fontWeight: 'bold', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+            >
               Zero-Knowledge Privacy Model
             </Typography>
           </Box>
@@ -77,17 +81,25 @@ export const Home: React.FC = () => {
               letterSpacing: '-1px',
             }}
           >
-            Private Note Management,<br /> Shielded On-Chain Proofs.
+            Private Note Management,
+            <br /> Shielded On-Chain Proofs.
           </Typography>
 
           <Typography variant="h6" color="text.secondary" sx={{ fontWeight: '400', mb: 4, lineHeight: 1.6 }}>
-            Secret Notes leverages the privacy-first Midnight network. Write notes that are truly yours—only you hold the keys to decrypt them, while the blockchain secures commitments in zero-knowledge.
+            Secret Notes leverages the privacy-first Midnight network. Write notes that are truly yours—only you hold
+            the keys to decrypt them, while the blockchain secures commitments in zero-knowledge.
           </Typography>
 
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
             {isConnected ? (
               <>
-                <Button variant="contained" color="primary" component={Link} to="/dashboard" endIcon={<ArrowForwardIcon />}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  to="/dashboard"
+                  endIcon={<ArrowForwardIcon />}
+                >
                   Go to Dashboard
                 </Button>
                 <Button variant="outlined" component={Link} to="/notes">
@@ -95,7 +107,11 @@ export const Home: React.FC = () => {
                 </Button>
               </>
             ) : (
-              <Button variant="contained" color="primary" onClick={() => document.getElementById('wallet-card-section')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => document.getElementById('wallet-card-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Connect Wallet to Start
               </Button>
             )}
@@ -108,7 +124,11 @@ export const Home: React.FC = () => {
         <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1, textAlign: 'center' }}>
           App Features
         </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 6, textAlign: 'center', maxWidth: '600px', mx: 'auto' }}>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ mb: 6, textAlign: 'center', maxWidth: '600px', mx: 'auto' }}
+        >
           Explore the components that make Secret Notes secure, decentralized, and 100% private.
         </Typography>
 
@@ -154,9 +174,11 @@ export const Home: React.FC = () => {
                 How Does It Work?
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 3, lineHeight: 1.6 }}>
-                Unlike public blockchains where your notes and transactions are fully readable by anyone, Midnight executes transaction logic locally on your machine.
-                When you create a note, your client computes a cryptographic hash commitment of the note content combined with a random salt and your wallet's secret key.
-                Only this commitment goes on-chain. When you edit or delete it, you generate a ZK proof demonstrating that you know the matching secret key and note content, without revealing them.
+                Unlike public blockchains where your notes and transactions are fully readable by anyone, Midnight
+                executes transaction logic locally on your machine. When you create a note, your client computes a
+                cryptographic hash commitment of the note content combined with a random salt and your wallet&apos;s
+                secret key. Only this commitment goes on-chain. When you edit or delete it, you generate a ZK proof
+                demonstrating that you know the matching secret key and note content, without revealing them.
               </Typography>
               <Button variant="outlined" color="primary" component={Link} to="/about">
                 Read Technical Privacy Model

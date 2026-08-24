@@ -23,10 +23,10 @@ export const About: React.FC = () => {
           Privacy Demystified
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-          Secret Notes is a next-generation decentralized application built on top of the Midnight Network. 
-          While typical decentralized applications expose transaction metadata, user choices, or states to the public ledger, 
-          Secret Notes ensures that note plaintext, titles, and edit histories are kept strictly local to the user's browser.
-          Only zero-knowledge proofs are sent to the network to validate the state transitions.
+          Secret Notes is a next-generation decentralized application built on top of the Midnight Network. While
+          typical decentralized applications expose transaction metadata, user choices, or states to the public ledger,
+          Secret Notes ensures that note plaintext, titles, and edit histories are kept strictly local to the
+          user&apos;s browser. Only zero-knowledge proofs are sent to the network to validate the state transitions.
         </Typography>
       </Paper>
 
@@ -46,7 +46,8 @@ export const About: React.FC = () => {
                 Note Commitments
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                Every note is hashed with a cryptographically secure random 32-byte salt and the owner's secret key:
+                Every note is hashed with a cryptographically secure random 32-byte salt and the owner&apos;s secret
+                key:
                 <br />
                 <code>commitment = persistentHash([sk, id, noteHash, salt])</code>
                 <br />
@@ -64,9 +65,10 @@ export const About: React.FC = () => {
                 Nullifiers
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                To edit or delete a note without disclosing which note is being modified, the application generates a deterministic nullifier:
+                To edit or delete a note without disclosing which note is being modified, the application generates a
+                deterministic nullifier:
                 <br />
-                <code>nullifier = persistentHash([pad("note:nullifier"), id, sk])</code>
+                <code>{'nullifier = persistentHash([pad("note:nullifier"), id, sk])'}</code>
                 <br />
                 The ledger records used nullifiers to prevent replay attacks and double-updates.
               </Typography>
@@ -82,9 +84,9 @@ export const About: React.FC = () => {
                 Local ZK Proofs
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                Proofs are compiled and executed inside the user's browser using Midnight's client-side prover. 
-                Your wallet signs transaction bindings and submits them to the network. 
-                Midnight indexers index the commitment maps so your client can verify ledger states seamlessly.
+                Proofs are compiled and executed inside the user&apos;s browser using Midnight&apos;s client-side
+                prover. Your wallet signs transaction bindings and submits them to the network. Midnight indexers index
+                the commitment maps so your client can verify ledger states seamlessly.
               </Typography>
             </CardContent>
           </Card>
@@ -99,26 +101,72 @@ export const About: React.FC = () => {
 
         <Box sx={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', overflow: 'hidden' }}>
           {/* Header row */}
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', background: 'rgba(255,255,255,0.02)', p: 2, borderBottom: '1px solid rgba(255,255,255,0.06)', fontWeight: 'bold' }}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              background: 'rgba(255,255,255,0.02)',
+              p: 2,
+              borderBottom: '1px solid rgba(255,255,255,0.06)',
+              fontWeight: 'bold',
+            }}
+          >
             <Typography variant="subtitle2">Client-Side (Private & Local)</Typography>
             <Typography variant="subtitle2">On-Chain (Public & Ledger)</Typography>
           </Box>
           {/* Content rows */}
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', p: 2, borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-            <Typography variant="body2" color="text.secondary">Note Title & plain text Content</Typography>
-            <Typography variant="body2" color="text.secondary">None (Completely Hidden)</Typography>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              p: 2,
+              borderBottom: '1px solid rgba(255,255,255,0.04)',
+            }}
+          >
+            <Typography variant="body2" color="text.secondary">
+              Note Title & plain text Content
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              None (Completely Hidden)
+            </Typography>
           </Box>
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', p: 2, borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-            <Typography variant="body2" color="text.secondary">Wallet Secret Seed / Private Key</Typography>
-            <Typography variant="body2" color="text.secondary">None (Never leaves your wallet)</Typography>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              p: 2,
+              borderBottom: '1px solid rgba(255,255,255,0.04)',
+            }}
+          >
+            <Typography variant="body2" color="text.secondary">
+              Wallet Secret Seed / Private Key
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              None (Never leaves your wallet)
+            </Typography>
           </Box>
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', p: 2, borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-            <Typography variant="body2" color="text.secondary">Random note identifiers and salts</Typography>
-            <Typography variant="body2" color="text.secondary">None (Stored in local storage)</Typography>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              p: 2,
+              borderBottom: '1px solid rgba(255,255,255,0.04)',
+            }}
+          >
+            <Typography variant="body2" color="text.secondary">
+              Random note identifiers and salts
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              None (Stored in local storage)
+            </Typography>
           </Box>
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', p: 2 }}>
-            <Typography variant="body2" color="text.secondary">ZKP prover execution data</Typography>
-            <Typography variant="body2" color="text.secondary">Hashed commitments & Nullifiers lists</Typography>
+            <Typography variant="body2" color="text.secondary">
+              ZKP prover execution data
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Hashed commitments & Nullifiers lists
+            </Typography>
           </Box>
         </Box>
       </Paper>

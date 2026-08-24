@@ -43,9 +43,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <span>{title}</span>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText color="text.secondary">
-          {message}
-        </DialogContentText>
+        <DialogContentText color="text.secondary">{message}</DialogContentText>
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 3, pt: 1 }}>
         <Button onClick={onCancel} variant="outlined" color="inherit">

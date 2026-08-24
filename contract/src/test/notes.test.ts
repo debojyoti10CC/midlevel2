@@ -31,7 +31,7 @@ describe("Secret Notes smart contract", () => {
 
     // Verify it cannot be created again
     expect(() => simulator.createNote(id, noteHash, salt)).toThrow(
-      "failed assert: Note commitment already exists"
+      "failed assert: Note commitment already exists",
     );
   });
 
@@ -58,7 +58,7 @@ describe("Secret Notes smart contract", () => {
     const salt = randomBytes(32);
 
     expect(() => simulator.readMyNotes(id, noteHash, salt)).toThrow(
-      "failed assert: Note does not exist on-chain"
+      "failed assert: Note does not exist on-chain",
     );
   });
 
@@ -77,18 +77,24 @@ describe("Secret Notes smart contract", () => {
     const newSalt = randomBytes(32);
 
     const ledgerState = simulator.updateNote(
-      oldId, oldNoteHash, oldSalt,
-      newId, newNoteHash, newSalt
+      oldId,
+      oldNoteHash,
+      oldSalt,
+      newId,
+      newNoteHash,
+      newSalt,
     );
 
     expect(ledgerState.notes.size()).toEqual(2n); // old + new
     expect(ledgerState.nullifiers.size()).toEqual(1n);
 
     expect(() => simulator.readMyNotes(oldId, oldNoteHash, oldSalt)).toThrow(
-      "failed assert: Note has been nullified"
+      "failed assert: Note has been nullified",
     );
 
-    expect(() => simulator.readMyNotes(newId, newNoteHash, newSalt)).not.toThrow();
+    expect(() =>
+      simulator.readMyNotes(newId, newNoteHash, newSalt),
+    ).not.toThrow();
   });
 
   it("lets you delete a note", () => {
@@ -105,7 +111,7 @@ describe("Secret Notes smart contract", () => {
     expect(ledgerState.nullifiers.size()).toEqual(1n);
 
     expect(() => simulator.readMyNotes(id, noteHash, salt)).toThrow(
-      "failed assert: Note has been nullified"
+      "failed assert: Note has been nullified",
     );
   });
 });

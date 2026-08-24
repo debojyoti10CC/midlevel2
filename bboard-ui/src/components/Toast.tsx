@@ -10,7 +10,12 @@ interface ToastProps {
 
 export const Toast: React.FC<ToastProps> = ({ open, message, severity, onClose }) => {
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={onClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+    <Snackbar
+      open={open}
+      autoHideDuration={6000}
+      onClose={onClose}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+    >
       <Alert
         onClose={onClose}
         severity={severity}
@@ -24,8 +29,8 @@ export const Toast: React.FC<ToastProps> = ({ open, message, severity, onClose }
             severity === 'success'
               ? 'rgba(16, 185, 129, 0.25)'
               : severity === 'error'
-              ? 'rgba(239, 68, 68, 0.25)'
-              : 'rgba(255, 255, 255, 0.1)'
+                ? 'rgba(239, 68, 68, 0.25)'
+                : 'rgba(255, 255, 255, 0.1)'
           }`,
         }}
       >

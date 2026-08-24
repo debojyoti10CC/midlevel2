@@ -1,5 +1,20 @@
 import React from 'react';
-import { AppBar, Toolbar, Box, Typography, Button, Container, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Typography,
+  Button,
+  Container,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShieldIcon from '@mui/icons-material/Shield';
 import { NavLink } from 'react-router-dom';
@@ -34,10 +49,22 @@ export const Navbar: React.FC = () => {
   });
 
   return (
-    <AppBar position="sticky" sx={{ background: 'rgba(3, 3, 8, 0.7)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', boxShadow: 'none' }}>
+    <AppBar
+      position="sticky"
+      sx={{
+        background: 'rgba(3, 3, 8, 0.7)',
+        backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        boxShadow: 'none',
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between', height: '76px', flexDirection: 'row-reverse' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none', color: 'inherit' }} component={NavLink} to="/">
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none', color: 'inherit' }}
+            component={NavLink}
+            to="/"
+          >
             <Box
               sx={{
                 width: '40px',
@@ -52,7 +79,16 @@ export const Navbar: React.FC = () => {
             >
               <ShieldIcon sx={{ color: '#fff', fontSize: '20px' }} />
             </Box>
-            <Typography variant="h6" sx={{ fontWeight: '800', letterSpacing: '0.5px', background: 'linear-gradient(90deg, #fff, #cbd5e1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: '800',
+                letterSpacing: '0.5px',
+                background: 'linear-gradient(90deg, #fff, #cbd5e1)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               SECRET NOTES
             </Typography>
           </Box>
@@ -82,9 +118,19 @@ export const Navbar: React.FC = () => {
                   gap: 1,
                 }}
               >
-                <Box sx={{ width: '9px', height: '9px', borderRadius: '3px', background: '#10b981', boxShadow: '0 0 8px #10b981' }} />
+                <Box
+                  sx={{
+                    width: '9px',
+                    height: '9px',
+                    borderRadius: '3px',
+                    background: '#10b981',
+                    boxShadow: '0 0 8px #10b981',
+                  }}
+                />
                 <Typography variant="caption" sx={{ fontFamily: 'monospace', fontWeight: 'bold' }}>
-                  {walletAddress ? `${walletAddress.substring(0, 8)}...${walletAddress.substring(walletAddress.length - 8)}` : 'Connected'}
+                  {walletAddress
+                    ? `${walletAddress.substring(0, 8)}...${walletAddress.substring(walletAddress.length - 8)}`
+                    : 'Connected'}
                 </Typography>
               </Box>
             )}

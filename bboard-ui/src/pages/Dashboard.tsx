@@ -62,7 +62,16 @@ export const Dashboard: React.FC = () => {
                   </Typography>
                   <StatusBadge status="connected" label="Connected" />
                 </Box>
-                <Typography variant="caption" sx={{ fontFamily: 'monospace', background: 'rgba(0,0,0,0.2)', p: 1, borderRadius: '4px', wordBreak: 'break-all' }}>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    fontFamily: 'monospace',
+                    background: 'rgba(0,0,0,0.2)',
+                    p: 1,
+                    borderRadius: '4px',
+                    wordBreak: 'break-all',
+                  }}
+                >
                   {walletAddress}
                 </Typography>
 
@@ -116,7 +125,10 @@ export const Dashboard: React.FC = () => {
                 </Typography>
               </Box>
               <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                Midnight ledger states verify ZK proof validation results. A block explorer or any public crawler sees only empty constructor deploy events, Note commitment hashes inside the `notes` map, and 32-byte nullifiers. The actual contents are never transmitted across the network, guaranteeing total confidentiality.
+                Midnight ledger states verify ZK proof validation results. A block explorer or any public crawler sees
+                only empty constructor deploy events, Note commitment hashes inside the `notes` map, and 32-byte
+                nullifiers. The actual contents are never transmitted across the network, guaranteeing total
+                confidentiality.
               </Typography>
             </Paper>
           </Box>

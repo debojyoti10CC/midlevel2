@@ -26,7 +26,7 @@ export class NotesSimulator {
       currentContractState,
       currentZswapLocalState,
     } = this.contract.initialState(
-      createConstructorContext({ secretKey }, "0".repeat(64))
+      createConstructorContext({ secretKey }, "0".repeat(64)),
     );
     this.circuitContext = {
       currentPrivateState,
@@ -56,28 +56,40 @@ export class NotesSimulator {
     return this.circuitContext.currentPrivateState;
   }
 
-  public createNote(id: Uint8Array, noteHash: Uint8Array, salt: Uint8Array): Ledger {
+  public createNote(
+    id: Uint8Array,
+    noteHash: Uint8Array,
+    salt: Uint8Array,
+  ): Ledger {
     this.circuitContext = this.contract.impureCircuits.createNote(
       this.circuitContext,
       id,
       noteHash,
-      salt
+      salt,
     ).context;
     return ledger(this.circuitContext.currentQueryContext.state);
   }
 
-  public readMyNotes(id: Uint8Array, noteHash: Uint8Array, salt: Uint8Array): void {
+  public readMyNotes(
+    id: Uint8Array,
+    noteHash: Uint8Array,
+    salt: Uint8Array,
+  ): void {
     this.circuitContext = this.contract.impureCircuits.readMyNotes(
       this.circuitContext,
       id,
       noteHash,
-      salt
+      salt,
     ).context;
   }
 
   public updateNote(
-    oldId: Uint8Array, oldNoteHash: Uint8Array, oldSalt: Uint8Array,
-    newId: Uint8Array, newNoteHash: Uint8Array, newSalt: Uint8Array
+    oldId: Uint8Array,
+    oldNoteHash: Uint8Array,
+    oldSalt: Uint8Array,
+    newId: Uint8Array,
+    newNoteHash: Uint8Array,
+    newSalt: Uint8Array,
   ): Ledger {
     this.circuitContext = this.contract.impureCircuits.updateNote(
       this.circuitContext,
@@ -86,17 +98,21 @@ export class NotesSimulator {
       oldSalt,
       newId,
       newNoteHash,
-      newSalt
+      newSalt,
     ).context;
     return ledger(this.circuitContext.currentQueryContext.state);
   }
 
-  public deleteNote(id: Uint8Array, noteHash: Uint8Array, salt: Uint8Array): Ledger {
+  public deleteNote(
+    id: Uint8Array,
+    noteHash: Uint8Array,
+    salt: Uint8Array,
+  ): Ledger {
     this.circuitContext = this.contract.impureCircuits.deleteNote(
       this.circuitContext,
       id,
       noteHash,
-      salt
+      salt,
     ).context;
     return ledger(this.circuitContext.currentQueryContext.state);
   }

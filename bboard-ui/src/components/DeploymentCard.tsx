@@ -41,14 +41,30 @@ export const DeploymentCard: React.FC = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
           {/* Active Contract info */}
           {activeAddr && (
-            <Paper sx={{ p: 2.5, background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.25)', borderRadius: '12px' }}>
+            <Paper
+              sx={{
+                p: 2.5,
+                background: 'rgba(16, 185, 129, 0.05)',
+                border: '1px solid rgba(16, 185, 129, 0.25)',
+                borderRadius: '12px',
+              }}
+            >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <CheckCircleIcon sx={{ color: '#10b981', fontSize: '20px' }} />
                 <Typography variant="subtitle2" sx={{ color: '#10b981', fontWeight: 'bold' }}>
                   Active Contract Address
                 </Typography>
               </Box>
-              <Typography variant="body2" sx={{ fontFamily: 'monospace', wordBreak: 'break-all', background: 'rgba(0,0,0,0.2)', p: 1, borderRadius: '6px' }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontFamily: 'monospace',
+                  wordBreak: 'break-all',
+                  background: 'rgba(0,0,0,0.2)',
+                  p: 1,
+                  borderRadius: '6px',
+                }}
+              >
                 {activeAddr}
               </Typography>
             </Paper>
@@ -59,13 +75,7 @@ export const DeploymentCard: React.FC = () => {
             <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
               Deploy New Secret Notes Contract
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={deploy}
-              disabled={isDeploying || isJoining}
-              fullWidth
-            >
+            <Button variant="contained" color="primary" onClick={deploy} disabled={isDeploying || isJoining} fullWidth>
               {isDeploying ? (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                   <CircularProgress size={18} color="inherit" />
@@ -91,11 +101,7 @@ export const DeploymentCard: React.FC = () => {
                 disabled={isDeploying || isJoining}
                 fullWidth
               />
-              <Button
-                type="submit"
-                variant="outlined"
-                disabled={isDeploying || isJoining || !joinAddress.trim()}
-              >
+              <Button type="submit" variant="outlined" disabled={isDeploying || isJoining || !joinAddress.trim()}>
                 {isJoining ? <CircularProgress size={18} color="inherit" /> : 'Join'}
               </Button>
             </Box>
@@ -103,8 +109,22 @@ export const DeploymentCard: React.FC = () => {
 
           {/* Deployment results */}
           {(isDeploying || txHash || txSuccess !== null || deployError || joinError) && (
-            <Paper sx={{ p: 2, background: 'rgba(255, 255, 255, 0.01)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-              <Typography variant="caption" sx={{ fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }} color="text.secondary">
+            <Paper
+              sx={{
+                p: 2,
+                background: 'rgba(255, 255, 255, 0.01)',
+                border: '1px solid rgba(255,255,255,0.05)',
+                borderRadius: '12px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 1.5,
+              }}
+            >
+              <Typography
+                variant="caption"
+                sx={{ fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}
+                color="text.secondary"
+              >
                 Deployment Logs
               </Typography>
 
@@ -139,7 +159,16 @@ export const DeploymentCard: React.FC = () => {
               )}
 
               {(deployError || joinError) && (
-                <Typography variant="caption" color="error" sx={{ background: 'rgba(239, 68, 68, 0.05)', p: 1, borderRadius: '6px', border: '1px solid rgba(239,68,68,0.1)' }}>
+                <Typography
+                  variant="caption"
+                  color="error"
+                  sx={{
+                    background: 'rgba(239, 68, 68, 0.05)',
+                    p: 1,
+                    borderRadius: '6px',
+                    border: '1px solid rgba(239,68,68,0.1)',
+                  }}
+                >
                   Error: {deployError || joinError}
                 </Typography>
               )}

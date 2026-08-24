@@ -27,16 +27,20 @@ export const Deploy: React.FC = () => {
             </Typography>
           </Box>
           <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-            Secret Notes uses a shared smart contract instance on the ledger. 
-            When you deploy a new contract instance:
-            <br /><br />
+            Secret Notes uses a shared smart contract instance on the ledger. When you deploy a new contract instance:
+            <br />
+            <br />
             1. You register the commitment state rules for your notes on the Midnight Preprod ledger.
             <br />
-            2. The contract has no access parameters for other users, meaning everyone can write commitments to it while maintaining separate private state environments.
+            2. The contract has no access parameters for other users, meaning everyone can write commitments to it while
+            maintaining separate private state environments.
             <br />
-            3. You receive a unique 64-character contract address. Store this address or share it with others if you want to reuse the ledger maps.
-            <br /><br />
-            Alternatively, if you already have a contract address, you can input it in the "Join" form on the dashboard or deployment card to continue your session.
+            3. You receive a unique 64-character contract address. Store this address or share it with others if you
+            want to reuse the ledger maps.
+            <br />
+            <br />
+            Alternatively, if you already have a contract address, you can input it in the &quot;Join&quot; form on the
+            dashboard or deployment card to continue your session.
           </Typography>
         </Paper>
       </Box>

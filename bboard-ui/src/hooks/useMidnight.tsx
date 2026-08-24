@@ -1,6 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { type ContractAddress, toHex, fromHex } from '@midnight-ntwrk/midnight-js-protocol/compact-runtime';
-import { type NotesDerivedState, type DeployedNotesAPI, NotesAPI, type NotesProviders, type NotesCircuitKeys } from '../../../api/src/index';
+import {
+  type NotesDerivedState,
+  type DeployedNotesAPI,
+  NotesAPI,
+  type NotesProviders,
+  type NotesCircuitKeys,
+} from '../../../api/src/index';
 import { ConnectedAPI, type InitialAPI } from '@midnight-ntwrk/dapp-connector-api';
 import { FetchZkConfigProvider } from '@midnight-ntwrk/midnight-js-fetch-zk-config-provider';
 import { httpClientProofProvider } from '@midnight-ntwrk/midnight-js-http-client-proof-provider';
@@ -10,7 +16,14 @@ import { NotesPrivateState, createNotesPrivateState } from '../../../contract/sr
 import { notesPrivateStateKey } from '../../../api/src/common-types';
 import { NetworkId } from '@midnight-ntwrk/midnight-js-network-id';
 import { logger } from '../main';
-import { type FinalizedTransaction, Transaction, SignatureEnabled, Proof, Binding, TransactionId } from '@midnight-ntwrk/midnight-js-protocol/ledger';
+import {
+  type FinalizedTransaction,
+  Transaction,
+  SignatureEnabled,
+  Proof,
+  Binding,
+  TransactionId,
+} from '@midnight-ntwrk/midnight-js-protocol/ledger';
 import type { UnboundTransaction } from '@midnight-ntwrk/midnight-js-types';
 import * as utils from '../../../api/src/utils/index';
 import { WalletService } from '../services/wallet.service';
@@ -87,18 +100,18 @@ export const MidnightProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     try {
       const api = await WalletService.connect(targetNetwork);
       const shieldedAddresses = await api.getShieldedAddresses();
-      
+
       setConnectedAPI(api);
       setWalletAddress(shieldedAddresses.shieldedCoinPublicKey);
       setNetwork(targetNetwork);
       setConnectionStatus('connected');
-      
+
       localStorage.setItem('midnight_wallet_address', shieldedAddresses.shieldedCoinPublicKey);
       localStorage.setItem('midnight_network', targetNetwork);
       return api;
-    } catch (err: any) {
+    } catch (err) {
       setConnectionStatus('disconnected');
-      setWalletError(err.message || 'Unknown wallet connection error');
+      setWalletError((err instanceof Error ? err.message : undefined) || 'Unknown wallet connection error');
       logger.error(err, 'Failed to connect wallet');
       throw err;
     }
@@ -108,30 +121,37 @@ export const MidnightProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const zkConfigPath = window.location.origin;
     const keyMaterialProvider = new FetchZkConfigProvider<NotesCircuitKeys>(zkConfigPath, fetch.bind(window));
     const config = await api.getConfiguration();
-    
+
     // Custom private state provider that persists private states locally in localStorage
     const inMemoryNotesPrivateStateProvider = inMemoryPrivateStateProvider<string, NotesPrivateState>();
-    
+
     // Wrap set/get to persist private state across page reloads
     const originalSet = inMemoryNotesPrivateStateProvider.set.bind(inMemoryNotesPrivateStateProvider);
     const originalGet = inMemoryNotesPrivateStateProvider.get.bind(inMemoryNotesPrivateStateProvider);
-    
+
     inMemoryNotesPrivateStateProvider.set = async (key, state) => {
       await originalSet(key, state);
       // Persist to localStorage
-      const address = localStorage.getItem('midnight_contract_address') || '0000000000000000000000000000000000000000000000000000000000000000';
-      localStorage.setItem(`midnight_private_state_${address}_${key}`, JSON.stringify({
-        secretKey: toHex(state.secretKey),
-        notes: state.notes,
-      }));
+      const address =
+        localStorage.getItem('midnight_contract_address') ||
+        '0000000000000000000000000000000000000000000000000000000000000000';
+      localStorage.setItem(
+        `midnight_private_state_${address}_${key}`,
+        JSON.stringify({
+          secretKey: toHex(state.secretKey),
+          notes: state.notes,
+        }),
+      );
     };
 
     inMemoryNotesPrivateStateProvider.get = async (key) => {
-      const address = localStorage.getItem('midnight_contract_address') || '0000000000000000000000000000000000000000000000000000000000000000';
+      const address =
+        localStorage.getItem('midnight_contract_address') ||
+        '0000000000000000000000000000000000000000000000000000000000000000';
       const stored = localStorage.getItem(`midnight_private_state_${address}_${key}`);
       if (stored) {
         try {
-          const parsed = JSON.parse(stored);
+          const parsed = JSON.parse(stored) as { secretKey: string; notes?: Record<string, unknown> };
           const state = {
             secretKey: fromHex(parsed.secretKey),
             notes: parsed.notes,
@@ -193,36 +213,39 @@ export const MidnightProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
   }, []);
 
-  const resolveContract = useCallback(async (address?: string) => {
-    if (!connectedAPI) {
-      throw new Error('Please connect your wallet first.');
-    }
-
-    setIsWorking(true);
-    setTxError(null);
-    setTxSuccess(null);
-    setTxHash(null);
-
-    try {
-      const providers = await getProviders(connectedAPI);
-      let api: DeployedNotesAPI;
-
-      if (address && address.length > 50) {
-        api = await NotesAPI.join(providers, address, logger);
-      } else {
-        api = await NotesAPI.deploy(providers, logger);
+  const resolveContract = useCallback(
+    async (address?: string) => {
+      if (!connectedAPI) {
+        throw new Error('Please connect your wallet first.');
       }
 
-      setDeployedAPI(api);
-      setContractAddress(api.deployedContractAddress);
-      localStorage.setItem('midnight_contract_address', api.deployedContractAddress);
-    } catch (err: any) {
-      setTxError(err.message || 'Error deploying/joining contract');
-      throw err;
-    } finally {
-      setIsWorking(false);
-    }
-  }, [connectedAPI, getProviders]);
+      setIsWorking(true);
+      setTxError(null);
+      setTxSuccess(null);
+      setTxHash(null);
+
+      try {
+        const providers = await getProviders(connectedAPI);
+        let api: DeployedNotesAPI;
+
+        if (address && address.length > 50) {
+          api = await NotesAPI.join(providers, address, logger);
+        } else {
+          api = await NotesAPI.deploy(providers, logger);
+        }
+
+        setDeployedAPI(api);
+        setContractAddress(api.deployedContractAddress);
+        localStorage.setItem('midnight_contract_address', api.deployedContractAddress);
+      } catch (err) {
+        setTxError((err instanceof Error ? err.message : undefined) || 'Error deploying/joining contract');
+        throw err;
+      } finally {
+        setIsWorking(false);
+      }
+    },
+    [connectedAPI, getProviders],
+  );
 
   // Restore session
   useEffect(() => {
@@ -262,8 +285,8 @@ export const MidnightProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       },
       error: (err) => {
         logger.error(err, 'Contract state stream error');
-        setTxError(err.message || String(err));
-      }
+        setTxError((err instanceof Error ? err.message : undefined) || String(err));
+      },
     });
 
     return () => {
@@ -271,62 +294,71 @@ export const MidnightProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
   }, [deployedAPI]);
 
-  const createNote = useCallback(async (title: string, content: string) => {
-    if (!deployedAPI) throw new Error('Contract not initialized');
-    setIsWorking(true);
-    setTxError(null);
-    setTxSuccess(null);
-    setTxHash(null);
+  const createNote = useCallback(
+    async (title: string, content: string) => {
+      if (!deployedAPI) throw new Error('Contract not initialized');
+      setIsWorking(true);
+      setTxError(null);
+      setTxSuccess(null);
+      setTxHash(null);
 
-    try {
-      await deployedAPI.createNote(title, content);
-      setTxSuccess(true);
-    } catch (err: any) {
-      setTxSuccess(false);
-      setTxError(err.message || 'Transaction failed during circuit call');
-      throw err;
-    } finally {
-      setIsWorking(false);
-    }
-  }, [deployedAPI]);
+      try {
+        await deployedAPI.createNote(title, content);
+        setTxSuccess(true);
+      } catch (err) {
+        setTxSuccess(false);
+        setTxError((err instanceof Error ? err.message : undefined) || 'Transaction failed during circuit call');
+        throw err;
+      } finally {
+        setIsWorking(false);
+      }
+    },
+    [deployedAPI],
+  );
 
-  const updateNote = useCallback(async (idHex: string, title: string, content: string) => {
-    if (!deployedAPI) throw new Error('Contract not initialized');
-    setIsWorking(true);
-    setTxError(null);
-    setTxSuccess(null);
-    setTxHash(null);
+  const updateNote = useCallback(
+    async (idHex: string, title: string, content: string) => {
+      if (!deployedAPI) throw new Error('Contract not initialized');
+      setIsWorking(true);
+      setTxError(null);
+      setTxSuccess(null);
+      setTxHash(null);
 
-    try {
-      await deployedAPI.updateNote(idHex, title, content);
-      setTxSuccess(true);
-    } catch (err: any) {
-      setTxSuccess(false);
-      setTxError(err.message || 'Transaction failed during circuit call');
-      throw err;
-    } finally {
-      setIsWorking(false);
-    }
-  }, [deployedAPI]);
+      try {
+        await deployedAPI.updateNote(idHex, title, content);
+        setTxSuccess(true);
+      } catch (err) {
+        setTxSuccess(false);
+        setTxError((err instanceof Error ? err.message : undefined) || 'Transaction failed during circuit call');
+        throw err;
+      } finally {
+        setIsWorking(false);
+      }
+    },
+    [deployedAPI],
+  );
 
-  const deleteNote = useCallback(async (idHex: string) => {
-    if (!deployedAPI) throw new Error('Contract not initialized');
-    setIsWorking(true);
-    setTxError(null);
-    setTxSuccess(null);
-    setTxHash(null);
+  const deleteNote = useCallback(
+    async (idHex: string) => {
+      if (!deployedAPI) throw new Error('Contract not initialized');
+      setIsWorking(true);
+      setTxError(null);
+      setTxSuccess(null);
+      setTxHash(null);
 
-    try {
-      await deployedAPI.deleteNote(idHex);
-      setTxSuccess(true);
-    } catch (err: any) {
-      setTxSuccess(false);
-      setTxError(err.message || 'Transaction failed during circuit call');
-      throw err;
-    } finally {
-      setIsWorking(false);
-    }
-  }, [deployedAPI]);
+      try {
+        await deployedAPI.deleteNote(idHex);
+        setTxSuccess(true);
+      } catch (err) {
+        setTxSuccess(false);
+        setTxError((err instanceof Error ? err.message : undefined) || 'Transaction failed during circuit call');
+        throw err;
+      } finally {
+        setIsWorking(false);
+      }
+    },
+    [deployedAPI],
+  );
 
   return (
     <MidnightContext.Provider

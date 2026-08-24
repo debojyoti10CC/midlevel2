@@ -30,10 +30,22 @@ export const Footer: React.FC = () => {
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', gap: 3 }}>
-            <Link href="https://midnight.network" target="_blank" rel="noopener" color="rgba(255, 255, 255, 0.5)" sx={{ textDecoration: 'none', '&:hover': { color: '#f43f5e' } }}>
+            <Link
+              href="https://midnight.network"
+              target="_blank"
+              rel="noopener"
+              color="rgba(255, 255, 255, 0.5)"
+              sx={{ textDecoration: 'none', '&:hover': { color: '#f43f5e' } }}
+            >
               Official Website
             </Link>
-            <Link href="https://docs.midnight.network" target="_blank" rel="noopener" color="rgba(255, 255, 255, 0.5)" sx={{ textDecoration: 'none', '&:hover': { color: '#f43f5e' } }}>
+            <Link
+              href="https://docs.midnight.network"
+              target="_blank"
+              rel="noopener"
+              color="rgba(255, 255, 255, 0.5)"
+              sx={{ textDecoration: 'none', '&:hover': { color: '#f43f5e' } }}
+            >
               Developer Docs
             </Link>
           </Box>

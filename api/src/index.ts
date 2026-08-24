@@ -45,7 +45,7 @@ export class NotesAPI implements DeployedNotesAPI {
   ) {
     this.deployedContractAddress = deployedContract.deployTxData.public.contractAddress;
     providers.privateStateProvider.setContractAddress(this.deployedContractAddress);
-    
+
     this.state$ = combineLatest(
       [
         // Public ledger state
@@ -63,13 +63,17 @@ export class NotesAPI implements DeployedNotesAPI {
           ),
         ),
         // Private state (cast to include notes dictionary)
-        from(providers.privateStateProvider.get(notesPrivateStateKey) as Promise<NotesPrivateState & { notes?: Record<string, Note> }>),
+        from(
+          providers.privateStateProvider.get(notesPrivateStateKey) as Promise<
+            NotesPrivateState & { notes?: Record<string, Note> }
+          >,
+        ),
       ],
       (ledgerState, privateState) => {
         if (!privateState) {
           return { notes: [] };
         }
-        
+
         const secretKey = privateState.secretKey;
         const localNotes = privateState.notes ? Object.values(privateState.notes) : [];
 
@@ -126,9 +130,11 @@ export class NotesAPI implements DeployedNotesAPI {
 
     const noteHash = Notes.pureCircuits.calculateNoteHash(titleHash, contentHash);
 
-    const privateState = await this.providers.privateStateProvider.get(notesPrivateStateKey) as (NotesPrivateState & { notes?: Record<string, Note> });
+    const privateState = (await this.providers.privateStateProvider.get(notesPrivateStateKey)) as NotesPrivateState & {
+      notes?: Record<string, Note>;
+    };
     if (!privateState) {
-      throw new Error("Private state not found");
+      throw new Error('Private state not found');
     }
     const secretKey = privateState.secretKey;
 
@@ -163,9 +169,11 @@ export class NotesAPI implements DeployedNotesAPI {
   async updateNote(idHex: string, title: string, content: string): Promise<Note> {
     this.logger?.info(`updateNote: ${idHex}`);
 
-    const privateState = await this.providers.privateStateProvider.get(notesPrivateStateKey) as (NotesPrivateState & { notes?: Record<string, Note> });
+    const privateState = (await this.providers.privateStateProvider.get(notesPrivateStateKey)) as NotesPrivateState & {
+      notes?: Record<string, Note>;
+    };
     if (!privateState) {
-      throw new Error("Private state not found");
+      throw new Error('Private state not found');
     }
     const secretKey = privateState.secretKey;
     const currentNotes = privateState.notes ?? {};
@@ -199,10 +207,7 @@ export class NotesAPI implements DeployedNotesAPI {
     };
 
     // Call updateNote ZK circuit
-    await this.deployedContract.callTx.updateNote(
-      oldId, oldNoteHash, oldSalt,
-      newId, newNoteHash, newSalt
-    );
+    await this.deployedContract.callTx.updateNote(oldId, oldNoteHash, oldSalt, newId, newNoteHash, newSalt);
 
     // Remove old note entry and save updated note to private state
     delete currentNotes[idHex];
@@ -222,9 +227,11 @@ export class NotesAPI implements DeployedNotesAPI {
   async deleteNote(idHex: string): Promise<void> {
     this.logger?.info(`deleteNote: ${idHex}`);
 
-    const privateState = await this.providers.privateStateProvider.get(notesPrivateStateKey) as (NotesPrivateState & { notes?: Record<string, Note> });
+    const privateState = (await this.providers.privateStateProvider.get(notesPrivateStateKey)) as NotesPrivateState & {
+      notes?: Record<string, Note>;
+    };
     if (!privateState) {
-      throw new Error("Private state not found");
+      throw new Error('Private state not found');
     }
     const currentNotes = privateState.notes ?? {};
     const note = currentNotes[idHex];
@@ -257,14 +264,16 @@ export class NotesAPI implements DeployedNotesAPI {
     logger?.info(`deployNotesContract`);
 
     // Get or initialize private state key
-    providers.privateStateProvider.setContractAddress('0000000000000000000000000000000000000000000000000000000000000000');
+    providers.privateStateProvider.setContractAddress(
+      '0000000000000000000000000000000000000000000000000000000000000000',
+    );
     const existingPrivateState = await providers.privateStateProvider.get(notesPrivateStateKey);
     const initialPrivateState = existingPrivateState ?? createNotesPrivateState(utils.randomBytes(32));
 
     const deployedNotesContract = await deployContract(providers, {
       compiledContract: CompiledNotesContractContract,
       privateStateId: notesPrivateStateKey,
-      initialPrivateState
+      initialPrivateState,
     });
 
     logger?.trace({

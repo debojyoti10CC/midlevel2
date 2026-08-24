@@ -9,12 +9,18 @@ interface StatusBadgeProps {
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, label }) => {
   const getColor = () => {
     switch (status) {
-      case 'connected': return '#10b981'; // Green
-      case 'disconnected': return '#6b7280'; // Grey
-      case 'error': return '#ef4444'; // Red
-      case 'warning': return '#f59e0b'; // Amber
-      case 'info': return '#14b8a6'; // Cyan
-      default: return '#cbd5e1';
+      case 'connected':
+        return '#10b981'; // Green
+      case 'disconnected':
+        return '#6b7280'; // Grey
+      case 'error':
+        return '#ef4444'; // Red
+      case 'warning':
+        return '#f59e0b'; // Amber
+      case 'info':
+        return '#14b8a6'; // Cyan
+      default:
+        return '#cbd5e1';
     }
   };
 
@@ -31,7 +37,15 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, label }) => {
         py: 0.5,
       }}
     >
-      <Box sx={{ width: '9px', height: '9px', borderRadius: '3px', background: getColor(), boxShadow: `0 0 8px ${getColor()}` }} />
+      <Box
+        sx={{
+          width: '9px',
+          height: '9px',
+          borderRadius: '3px',
+          background: getColor(),
+          boxShadow: `0 0 8px ${getColor()}`,
+        }}
+      />
       <Typography variant="caption" sx={{ fontWeight: 'bold', color: getColor(), letterSpacing: '0.5px' }}>
         {label}
       </Typography>
