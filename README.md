@@ -1,5 +1,6 @@
 # Secret Notes DApp on Midnight Network
 
+[![CI](https://github.com/debojyoti10CC/midlevel2/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/debojyoti10CC/midlevel2/actions/workflows/ci.yaml)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D24.11.1-blue.svg?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/)
@@ -73,7 +74,37 @@ The following table breaks down each component, its execution context, security 
 
 ---
 
-## 3. Data Schemas & ZK Equations
+## 3. Privacy Model — What an Observer Can and Cannot Learn
+
+An "observer" here means anyone with read access to the public Midnight ledger and indexer: block explorers, other network participants, or the indexer operator itself. They see every transaction Secret Notes submits, but nothing more than what's listed below.
+
+### What an observer CAN learn
+
+| Observable | Why it's visible |
+| :--- | :--- |
+| **That some wallet interacted with the Secret Notes contract** | The contract address and transaction sender are public, like any on-chain transaction. |
+| **The number of notes ever created (ledger map size)** | `notes` and `nullifiers` are public ledger maps; their sizes (`.size()`) are readable by anyone querying contract state. |
+| **A note's 32-byte commitment hash** | `commitment = persistentHash([sk, id, noteHash, salt])` is stored on-chain verbatim so the ledger can check uniqueness. |
+| **A note's 32-byte nullifier hash, once it's edited or deleted** | `nullifier = persistentHash([pad("note:nullifier"), id, sk])` is posted on-chain to prevent replay/double-spend of that note's identity. |
+| **Approximate timing of note activity** | Block timestamps reveal *when* a create/update/delete transaction landed, even though the content is opaque. |
+| **Transaction fee and gas metadata** | Standard for any Midnight/Cardano-style transaction; unrelated to note content. |
+
+### What an observer CANNOT learn
+
+| Hidden data | Why it stays hidden |
+| :--- | :--- |
+| **Note title or content** | Never transmitted or stored on-chain in any form — plaintext lives only in the browser's local cache. Only `sha256(title \|\| content)` folded into the commitment ever reaches the network, and SHA-256 is one-way: the hash cannot be inverted to recover the text. |
+| **Which specific note a transaction refers to** | Commitments and nullifiers are indistinguishable 32-byte hashes; without the private salt and secret key used to derive them, an observer cannot map a hash back to "note #3 titled X." |
+| **Whether two notes belong to the same owner** | Commitments are salted with a fresh random 32 bytes per note and mixed with the wallet's secret key, so two notes from the same wallet produce unrelated-looking commitments — there's no on-chain link between them. |
+| **The wallet's secret key (`sk`)** | Never leaves the browser; it is used only as a private witness inside the local ZK proof, never serialized into a transaction. |
+| **That an update/delete is linked to its original create** | The ZK proof demonstrates knowledge of the matching `sk`, `id`, `noteHash`, and `salt` for the old commitment *without revealing them* — the on-chain footprint is just "some valid nullifier appeared," not "note X was changed to Y." |
+| **Note count per individual wallet** | The public ledger only exposes the *global* size of the `notes`/`nullifiers` maps, not a per-address breakdown — there's no on-chain field that groups commitments by owner. |
+
+In short: the chain is a append-only list of opaque commitments and nullifiers proven valid by zero-knowledge circuits. Everything a human would consider "the note" — its title, its content, and who specifically owns which entry — stays entirely client-side.
+
+---
+
+## 4. Data Schemas & ZK Equations
 
 To enforce security without exposing note titles or text, the DApp maps private plaintexts to public ledger states using cryptographic hashing.
 
@@ -86,7 +117,7 @@ To enforce security without exposing note titles or text, the DApp maps private 
 
 ---
 
-## 4. State Transition Workflow
+## 5. State Transition Workflow
 
 The sequence diagram below displays the operation flow when a user creates, edits, or deletes a private note:
 
@@ -135,7 +166,7 @@ sequenceDiagram
 
 ---
 
-## 5. ZK Smart Contract Constraints
+## 6. ZK Smart Contract Constraints
 
 The [notes.compact](file:///Ubuntu-22.04/home/sylvia/level2/contract/src/notes.compact) smart contract enforces the following zero-knowledge assertions during state execution:
 
@@ -145,7 +176,7 @@ The [notes.compact](file:///Ubuntu-22.04/home/sylvia/level2/contract/src/notes.c
 
 ---
 
-## 6. Folder Structure
+## 7. Folder Structure
 
 ```text
 ├── contract/            # Compact smart contract circuits & unit tests
@@ -168,7 +199,7 @@ The [notes.compact](file:///Ubuntu-22.04/home/sylvia/level2/contract/src/notes.c
 
 ---
 
-## 7. Installation & Running
+## 8. Installation & Running
 
 ### Prerequisites
 
@@ -194,7 +225,7 @@ The [notes.compact](file:///Ubuntu-22.04/home/sylvia/level2/contract/src/notes.c
 
 ---
 
-## 8. Smart Contract Compilation
+## 9. Smart Contract Compilation
 
 To compile `notes.compact` into TypeScript interfaces and generate ZKIR keys, execute inside the `contract` folder:
 ```bash
@@ -206,9 +237,17 @@ To run the ZK contract simulator unit tests:
 npm run test
 ```
 
+### Test Output
+
+The contract's Vitest suite exercises the full circuit lifecycle against the compiled ZK simulator — initial state, `createNote`, `readMyNotes` (both the happy path and the not-found case), `updateNote`, and `deleteNote`:
+
+![Contract test suite: 6 passed](docs/screenshots/contract-tests-passing.jpg)
+
+This same suite runs on every push and pull request via the [CI workflow](.github/workflows/ci.yaml) — see the CI badge at the top of this README for the latest run.
+
 ---
 
-## 9. Deployment Guide
+## 10. Deployment Guide
 
 To deploy the smart contract to Midnight Preprod:
 1. Ensure your browser is running the Lace Wallet extension set to Preprod network.
@@ -219,7 +258,7 @@ To deploy the smart contract to Midnight Preprod:
 
 ---
 
-## 10. Wallet Setup
+## 11. Wallet Setup
 
 1. Install the official **Midnight Lace Wallet** or **1AM Wallet** extension in your browser.
 2. Select the **Midnight Preprod** network configuration.
@@ -228,7 +267,7 @@ To deploy the smart contract to Midnight Preprod:
 
 ---
 
-## 11. Preprod Environment
+## 12. Preprod Environment
 
 To check transaction confirmation statuses or view block operations, use the Midnight Preprod Network Indexer:
 * **Preprod Indexer**: `https://indexer.preprod.midnight.network`
@@ -236,7 +275,7 @@ To check transaction confirmation statuses or view block operations, use the Mid
 
 ---
 
-## 12. Screenshots & Demo Placeholders
+## 13. Screenshots & Demo Placeholders
 
 ### Application Screenshots
 
@@ -250,7 +289,7 @@ To check transaction confirmation statuses or view block operations, use the Mid
 
 ---
 
-## 13. Contract Address Placeholder
+## 14. Contract Address Placeholder
 
 * **Deployed Contract Address**: `[Placeholder: Your Deployed Preprod Contract Address]`
 * **Contract Transaction Hash**: `[Placeholder: Deployment Transaction Hash]`
