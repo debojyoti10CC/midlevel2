@@ -296,7 +296,7 @@ To check transaction confirmation statuses or view block operations, use the Mid
 
 ### Project Demo Video
 
-* **Video Walkthrough**: *[Placeholder — link to be added: a ~1 minute recording of wallet connect + a successful circuit call]*
+* **Video Walkthrough**: [Watch on YouTube](https://youtu.be/WwQ3Vfvapk4) — wallet connect and a full circuit call walkthrough on the live deployment.
 
 ---
 
