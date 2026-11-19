@@ -64,3 +64,5 @@ managed/
 .claude
 .midnight-expertThumbs.db
 .env.local
+Thumbs.db
+.vscode/
