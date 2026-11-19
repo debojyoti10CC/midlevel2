@@ -62,4 +62,5 @@ managed/
 !contract/src/managed/notes/
 
 .claude
-.midnight-expert
+.midnight-expertThumbs.db
+.env.local
